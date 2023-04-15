@@ -15,8 +15,9 @@ const registerUser = asyncHandler(async (req, res) => {
   // Check if user exists
   const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(400).json({ message: "User already exists" });
-    // throw new Error("User already exists");
+    res.status(400);
+    // res.json({ message: "User already exists" });
+    throw new Error("User already exists");
   }
 
   // Hash password
@@ -38,8 +39,9 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(400).json({ messsage: "Invalid user data" });
-    // throw new Error("Invalid user data");
+    res.status(400);
+    // res.json({ messsage: "Invalid user data" });
+    throw new Error("Invalid user data");
   }
 });
 
@@ -58,8 +60,9 @@ const loginUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
-    res.status(400).json({ messsage: "Invalid credentials" });
-    // throw new Error("Invalid credentials");
+    res.status(400);
+    // res.json({ messsage: "Invalid credentials" });
+    throw new Error("Invalid credentials");
   }
 
   res.json({ message: "User Logged in" });

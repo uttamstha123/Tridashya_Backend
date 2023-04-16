@@ -74,7 +74,20 @@ const generateToken = (id) => {
     expiresIn: "30d",
   });
 };
+
+const getUser = asyncHandler(async(req,res) =>{
+  const userId = req.params.id;
+  console.log(userId);
+  const user = await User.findById(userId).select('-password');
+  
+  if(!user){
+    res.status(400);
+    throw new Error('user not found');
+  }
+  return res.json(user);
+})
 module.exports = {
   registerUser,
   loginUser,
+  getUser
 };

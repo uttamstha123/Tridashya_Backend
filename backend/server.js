@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const connectDb = require("./config/db");
-const {errorHandler} = require("./middleware/errorMiddleware");
+const { errorHandler } = require("./middleware/errorMiddleware");
 const app = express();
 
 // MIDDLEWARES
@@ -10,9 +10,10 @@ app.use(express.urlencoded({ extended: false }));
 
 // ROUTES
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/blog", require("./routes/blogRoutes"));
 
 // Error-handling middleware should go at the end of the middleware stack
-app.use(errorHandler); 
+app.use(errorHandler);
 
 // DATABASE CONNECTION
 connectDb().then(() => {

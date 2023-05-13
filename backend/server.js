@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 // ROUTES
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/blog", require("./routes/blogRoutes"));
-
+app.use('/api/project',require("./routes/projectRoutes"));
 // Error-handling middleware should go at the end of the middleware stack
 app.use(errorHandler);
 
